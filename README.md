@@ -1,4 +1,4 @@
-# Lambda Patreon + Google Sheets Integration
+# GCP Patreon + Google Sheets Integration
 
 ## Overview
 
@@ -18,10 +18,8 @@ The application performs the following key functions:
    Saves the generated Google Sheet to a specific Google Drive folder, as specified by the folder ID.
 
 4. **Error Handling and Logging**  
-   Logs errors encountered during API calls (e.g., authentication failures or data submission issues) to AWS CloudWatch, enabling traceability and troubleshooting.
+   Logs errors encountered during API calls (e.g., authentication failures or data submission issues) to Google Cloud Logging, enabling traceability and troubleshooting.
 
 ## Usage
 
-This Lambda function is triggered on a daily schedule, ensuring the latest `impression_counts` from all posts are captured and saved. Users can adjust the trigger schedule by modifying the configuration in the AWS Management Console.
-
----
+This Google Cloud Function is triggered on a daily schedule using Google Cloud Scheduler, ensuring the latest `impression_counts` from all posts are captured and saved. Users can adjust the trigger schedule by modifying the configuration in the Google Cloud Console.
