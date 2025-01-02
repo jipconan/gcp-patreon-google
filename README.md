@@ -23,3 +23,7 @@ The application performs the following key functions:
 ## Usage
 
 This Google Cloud Function is triggered on a daily schedule using Google Cloud Scheduler, ensuring the latest `impression_counts` from all posts are captured and saved. Users can adjust the trigger schedule by modifying the configuration in the Google Cloud Console.
+
+## Setup & Deployment
+
+I will update here real soon!
