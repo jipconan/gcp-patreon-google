@@ -3,11 +3,12 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+from google.fetch_secret import fetch_secret
 
 load_dotenv("google/.env")
 
 # Path to your service account JSON file
-SERVICE_ACCOUNT_FILE = 'google/fifth-bonbon-442814-r6-d9648c69b7f5.json'
+SERVICE_ACCOUNT_FILE = fetch_secret()
 
 # Define the necessary scopes for Google Sheets
 SCOPES = [
@@ -15,7 +16,7 @@ SCOPES = [
 ]
 
 # Authenticate using the service account
-credentials = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+credentials = Credentials.from_service_account_info(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 sheets_service = build('sheets', 'v4', credentials=credentials)
 
 def add_data_to_google_sheet(impression_counts):
@@ -56,5 +57,9 @@ def add_data_to_google_sheet(impression_counts):
     except Exception as e:
         print(f"Error occurred while appending data to the Google Sheet: {e}")
         return None
+
+    # Only remove the file if a temporary file was created
+    if isinstance(SERVICE_ACCOUNT_FILE, str) and os.path.exists(SERVICE_ACCOUNT_FILE):
+        os.remove(SERVICE_ACCOUNT_FILE)
 
     return sheet_id
