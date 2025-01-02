@@ -3,7 +3,7 @@ import requests
 def fetch_impression(post_id, session_id):
     base_url = f"https://www.patreon.com/api/posts/{post_id}"
     params = {
-        'fields[post]': 'impression_count,url'  # Fetch both impression count and url
+        'fields[post]': 'impression_count,url,title'  # Fetch both impression count and url
     }
     headers = {
         'Cookie': f'session_id={session_id};',
@@ -18,15 +18,17 @@ def fetch_impression(post_id, session_id):
             data = response.json()
             impression_count = data.get('data', {}).get('attributes', {}).get('impression_count', None)
             post_url = data.get('data', {}).get('attributes', {}).get('url', None)
+            post_title = data.get('data', {}).get('attributes', {}).get('title', None)
 
             # Log the impression count and URL
-            print(f"[LOG] Post ID: {post_id}, Impressions: {impression_count}, URL: {post_url}")
+            print(f"[LOG] Post ID: {post_id}, Impressions: {impression_count}, URL: {post_url}, Title: {post_title}")
 
             # Return a dictionary with post_id, impression_count, and post_url
             return {
                 "post_id": post_id,
                 "impression_count": impression_count,
-                "post_url": post_url
+                "post_url": post_url,
+                "post_title": post_title
             }
         else:
             print(f"[ERROR] Failed to fetch impressions for Post ID: {post_id}")

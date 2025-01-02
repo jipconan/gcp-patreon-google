@@ -35,7 +35,7 @@ def add_data_to_google_sheet(impression_counts):
 
     # Prepare the data to append (including date and time)
     try:
-        values = [[formatted_time, item['post_id'], item['post_url'], item['impression_count']] for item in impression_counts]
+        values = [[formatted_time, item['post_id'], item['post_title'], item['post_url'], item['impression_count']] for item in impression_counts]
     except KeyError as e:
         print(f"Error: Missing key {e} in impression_counts data.")
         return None
