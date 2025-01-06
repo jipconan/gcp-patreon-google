@@ -1,8 +1,8 @@
 import json
 from flask import Flask, request, jsonify
 import logging
-from patreon.fetch_all_post_ids import fetch_all_post_ids
-from patreon.fetch_impression import fetch_impression
+from patreon.fetch_all_posts_ids import fetch_all_posts_ids
+from patreon.fetch_post_data import fetch_post_data
 from google.add_data_to_google_sheet import add_data_to_google_sheet
 import os
 from dotenv import load_dotenv
@@ -21,24 +21,24 @@ def main():
     try:
         logging.info("Function triggered.")
 
-        # Fetch all post IDs
-        post_ids = fetch_all_post_ids()
+        # Fetch all post IDs fetch_all_posts_ids(startYear)
+        post_ids = fetch_all_posts_ids(2024)
 
         # Declare Patreon session ID
         session_id = os.getenv("PATRON_SESSION_ID")
 
         # List to store post IDs and impressions
-        impression_data = []
+        fetched_data = []
 
-        # Fetch impressions for each post and store the data
+        # Fetch post data for each post and store the data
         for post_id in post_ids:
-            impression = fetch_impression(post_id, session_id)
-            if impression:
-                impression_data.append(impression)
+            post_data = fetch_post_data(post_id, session_id)
+            if post_data:
+                fetched_data.append(post_data)
 
         # Add the data to Google Sheets
-        if impression_data:
-            sheet_id = add_data_to_google_sheet(impression_data)
+        if fetched_data:
+            sheet_id = add_data_to_google_sheet(fetched_data)
             logging.info(f"Data added to Google Sheet with ID: {sheet_id}")
             return jsonify({"message": f"Data added to Google Sheet with ID: {sheet_id}"}), 200
 

@@ -19,15 +19,15 @@ SCOPES = [
 credentials = Credentials.from_service_account_info(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 sheets_service = build('sheets', 'v4', credentials=credentials)
 
-def add_data_to_google_sheet(impression_counts):
+def add_data_to_google_sheet(data):
     # Use an existing Google Sheet ID from environment variables
     sheet_id = os.getenv("GOOGLE_SHEET_ID")
     if not sheet_id:
         print("Error: GOOGLE_SHEET_ID is not set.")
         return None
 
-    # Log the impression_counts to see its structure
-    print("[LOG] impression_counts:", impression_counts)
+    # Log the data to see its structure
+    print("[LOG] data:", data)
 
     # Get the current date and time
     now = datetime.now()
@@ -35,9 +35,19 @@ def add_data_to_google_sheet(impression_counts):
 
     # Prepare the data to append (including date and time)
     try:
-        values = [[formatted_time, item['post_id'], item['post_title'], item['post_url'], item['impression_count']] for item in impression_counts]
+           values = [
+        [
+            formatted_time,
+            item['post_id'],
+            item['post_title'],
+            item['post_url'],
+            item['impression_count'],
+            item.get('sales_count'),
+            item.get('earnings') 
+        ] for item in data
+    ]
     except KeyError as e:
-        print(f"Error: Missing key {e} in impression_counts data.")
+        print(f"Error: Missing key {e} in the post data.")
         return None
 
     # Append the data to the Google Sheet
