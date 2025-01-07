@@ -11,9 +11,9 @@ def fetch_secret():
 
     # Secret and project ID from environment variables
     secret_name = os.getenv("GOOGLE_SECRET_NAME")
-    project_id = os.getenv("GOOGLE_PROJECT_ID")
+    project_number = os.getenv("GOOGLE_PROJECT_NUMBER")
 
-    secret_key = f"projects/{project_id}/secrets/{secret_name}/versions/latest"
+    secret_key = f"projects/{project_number}/secrets/{secret_name}/versions/latest"
 
     try:
         # Access the secret version

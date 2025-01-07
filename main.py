@@ -6,6 +6,7 @@ from patreon.fetch_post_data import fetch_post_data
 from google.add_data_to_google_sheet import add_data_to_google_sheet
 import os
 from dotenv import load_dotenv
+from google.add_data_to_bigquery import add_data_to_bigquery
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -37,15 +38,21 @@ def main():
                 fetched_data.append(post_data)
 
         # Add the data to Google Sheets
+        # if fetched_data:
+        #     sheet_id = add_data_to_google_sheet(fetched_data)
+        #     logging.info(f"Data added to Google Sheet with ID: {sheet_id}")
+        #     return jsonify({"message": f"Data added to Google Sheet with ID: {sheet_id}"}), 200
+
+        # Add the data to Big Query
         if fetched_data:
-            sheet_id = add_data_to_google_sheet(fetched_data)
-            logging.info(f"Data added to Google Sheet with ID: {sheet_id}")
-            return jsonify({"message": f"Data added to Google Sheet with ID: {sheet_id}"}), 200
+            add_data_to_bigquery(fetched_data)
+            logging.info("Data added to Big Query.")
+            return jsonify({"message": "Data added to Big Query."}), 200
 
     except Exception as e:
         logging.error(f"Error occurred: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
 # Run Flask locally
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)

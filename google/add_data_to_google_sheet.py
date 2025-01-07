@@ -21,9 +21,9 @@ sheets_service = build('sheets', 'v4', credentials=credentials)
 
 def add_data_to_google_sheet(data):
     # Use an existing Google Sheet ID from environment variables
-    sheet_id = os.getenv("GOOGLE_SHEET_ID")
+    sheet_id = os.getenv("GOOGLE_SHEET_NUMBER")
     if not sheet_id:
-        print("Error: GOOGLE_SHEET_ID is not set.")
+        print("Error: GOOGLE_SHEET_NUMBER is not set.")
         return None
 
     # Log the data to see its structure
