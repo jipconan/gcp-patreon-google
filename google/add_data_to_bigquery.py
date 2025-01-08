@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 load_dotenv("google/.env")
 
 # Set the event timestamp
-event_timestamp = datetime.now(timezone.utc).isoformat()
+event_timestamp = datetime.now(timezone.utc).replace(microsecond=0).strftime('%Y-%m-%d %H:%M:%S UTC')
 
 # Fetch the service account key (returns a dictionary)
 # service_account_key = fetch_secret()
