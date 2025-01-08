@@ -1,8 +1,8 @@
 import os
 from google.cloud import bigquery
 from dotenv import load_dotenv
-from google.fetch_secret import fetch_secret
-from google.create_temp_key_file import create_temp_key_file
+# from google.fetch_secret import fetch_secret
+# from google.create_temp_key_file import create_temp_key_file
 from datetime import datetime, timezone
 
 # Load environment variables

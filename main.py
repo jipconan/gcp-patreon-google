@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 import logging
 from patreon.fetch_all_posts_ids import fetch_all_posts_ids
 from patreon.fetch_post_data import fetch_post_data
-from google.add_data_to_google_sheet import add_data_to_google_sheet
+# from google.add_data_to_google_sheet import add_data_to_google_sheet
 import os
 from dotenv import load_dotenv
 from google.add_data_to_bigquery import add_data_to_bigquery
