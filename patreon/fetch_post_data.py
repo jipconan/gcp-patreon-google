@@ -24,7 +24,7 @@ def fetch_post_data(post_id, session_id):
             data = response.json()
 
             # Log the full response for debugging
-            print(json.dumps(data, indent=2))
+            # print(json.dumps(data, indent=2))
 
             # Check if there are monetization options
             # if not data['data']['relationships']['content_unlock_options']['data']:
