@@ -15,11 +15,11 @@ event_timestamp = datetime.now(timezone.utc).isoformat()
 service_account_key = fetch_secret()
 
 def add_data_to_bigquery(fetched_data):
-    # Create a temporary service account JSON file
-    temp_key_file = create_temp_key_file(service_account_key)
+    # # Create a temporary service account JSON file
+    # temp_key_file = create_temp_key_file(service_account_key)
 
-    # Set GOOGLE_APPLICATION_CREDENTIALS to the temp file path
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = temp_key_file
+    # # Set GOOGLE_APPLICATION_CREDENTIALS to the temp file path
+    # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = temp_key_file
 
     # Initialize BigQuery client
     client = bigquery.Client()
@@ -51,7 +51,7 @@ def add_data_to_bigquery(fetched_data):
         print("Data inserted successfully.")
 
     # Clean up the temporary file
-    os.remove(temp_key_file)
+    # os.remove(temp_key_file)
 
 # if __name__ == "__main__":
 #     insert_data_to_bigquery()
