@@ -56,7 +56,7 @@ def fetch_post_data(post_id, session_id):
                 "sales_count": sales_count,
                 "earnings": earnings
             }
-            print(f"[LOG] {json.dumps(log_data, indent=2)}")
+            # print(f"[LOG] {json.dumps(log_data, indent=2)}")
             return log_data
         else:
             print(f"[ERROR] Status Code: {response.status_code}")
