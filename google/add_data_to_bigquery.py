@@ -12,7 +12,7 @@ load_dotenv("google/.env")
 event_timestamp = datetime.now(timezone.utc).isoformat()
 
 # Fetch the service account key (returns a dictionary)
-service_account_key = fetch_secret()
+# service_account_key = fetch_secret()
 
 def add_data_to_bigquery(fetched_data):
     # # Create a temporary service account JSON file
