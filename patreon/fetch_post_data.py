@@ -46,6 +46,7 @@ def fetch_post_data(post_id, session_id):
             impression_count = data['data']['attributes'].get('impression_count', 0)
             post_title = data['data']['attributes'].get('title', 'Untitled')
             post_url = data['links']['self']
+            post_published_at = data['data']['attributes']['published_at']
 
             # Log the result
             log_data = {
@@ -54,7 +55,8 @@ def fetch_post_data(post_id, session_id):
                 "post_url": post_url,
                 "impression_count": impression_count,
                 "sales_count": sales_count,
-                "earnings": earnings
+                "earnings": earnings,
+                "published_at": post_published_at,
             }
             print(f"[LOG] {json.dumps(log_data, indent=2)}")
             return log_data

@@ -39,7 +39,8 @@ def add_data_to_bigquery(fetched_data):
             "post_url": post.get("post_url"),
             "impression_count": post.get("impression_count"),
             "sales": post.get("sales_count"),
-            "earnings": post.get("earnings")
+            "earnings": post.get("earnings"),
+            "published_at": post.get("published_at"),
         })
 
 
